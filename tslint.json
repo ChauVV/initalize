@@ -69,10 +69,16 @@
             false
         ],
         "no-empty-interface": false,
+        "no-empty": false,
         "interface-name": [
             true,
             "never-prefix"
-        ]
+        ],
+        "jsx-no-lambda": false,
+        "no-console": false,
+        "member-access": false,
+        "no-var-requires": false,
+        "jsdoc-format": false
     },
     "jsRules": {
         "triple-equals": [

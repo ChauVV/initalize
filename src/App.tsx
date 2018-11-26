@@ -1,25 +1,15 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React from 'react'
 
-import React, { Component } from 'react'
-import { RenderView } from './RenderView'
+import { Provider } from 'react-redux'
+import storeRedux from 'reduxer/store'
 
-export interface Props { }
+import AppConnect from 'gui/Container/AppNavigator'
 
-export default class App extends Component<Props> {
-  constructor(props: Props) {
-    super(props)
-  }
-  public render() {
-    return (
-      <RenderView />
-    )
-  }
+const App = () => {
+  return (
+    <Provider store={storeRedux}>
+      <AppConnect />
+    </Provider>
+  )
 }
-
-
+export default App
