@@ -9,8 +9,12 @@
 import React, { Component } from 'react'
 import { RenderView } from './RenderView'
 
-interface Props { }
+export interface Props { }
+
 export default class App extends Component<Props> {
+  constructor(props: Props) {
+    super(props)
+  }
   public render() {
     return (
       <RenderView />
