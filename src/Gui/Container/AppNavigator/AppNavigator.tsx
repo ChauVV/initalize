@@ -55,10 +55,11 @@ const MainNavigator = createBottomTabNavigator(
   }
 )
 
-MainNavigator.navigationOptions = ({ navigation }: any) =>
-  navigation.state.index === 0
+MainNavigator.navigationOptions = ({ navigation }: any) => {
+  return navigation.state.index === 0
     ? { drawerLockMode: 'unlocked' }
     : { drawerLockMode: 'locked-closed' } // Only open drawer for main screen
+}
 
 const Drawer = createDrawerNavigator(
   {
