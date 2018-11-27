@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import clientReducer from './clientReducer'
 import currencyReducer from './currencyReducer'
 import languageReducer from './languageReducer'
 import loadingReducer from './loadingReducer'
@@ -14,5 +15,6 @@ export default combineReducers({
   places: placesReducer,
   loading: loadingReducer,
   navigate: routesReducer,
-  loginInfo: loginInfoReducer
+  loginInfo: loginInfoReducer,
+  clientState: clientReducer
 })

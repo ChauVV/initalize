@@ -1,53 +1,33 @@
 
 import Header from 'gui/Components/Header'
+import { object } from 'prop-types'
 import React from 'react'
-import { FlatList, StyleSheet, View } from 'react-native'
-import { width } from 'utils/globalStyles'
+import { FlatList, View } from 'react-native'
+import { icBar } from 'utils/globalIcons'
+import ClientCell from './Components/clientCell'
+import styles from './styles'
 
 export interface Props {
   navigation: any,
-  gotoDetail?: (user: any) => {},
-  renderRightIcon: () => {}
-  userState: any,
-  renderUserCell: any
+  gotoDetail: (client: any) => {},
+  clientState: any,
 }
-export const HomeView = ({ navigation, renderRightIcon, userState, renderUserCell }: Props) => {
+export const HomeView = ({ navigation, clientState, gotoDetail }: Props) => {
   return (
 
     <View style={styles.container}>
       <Header
         title='HomeScreen'
         rightAction={() => navigation.toggleDrawer()}
-        rightIcon={renderRightIcon()}
+        rightIcon={icBar}
       />
       <View style={styles.body}>
         <FlatList
-          data={userState.users}
+          data={clientState.clients}
           keyExtractor={(_, index) => index.toString()}
-          renderItem={renderUserCell}
+          renderItem={(object) => ClientCell({ object, gotoDetail })}
         />
       </View>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  cell: {
-    height: 50,
-    width: width(100),
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingLeft: 10,
-    borderBottomWidth: 0.5,
-    borderBottomColor: 'gray'
-  },
-  body: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#F5FCFF'
-  }
-})

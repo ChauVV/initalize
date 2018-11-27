@@ -78,7 +78,9 @@
         "no-console": false,
         "member-access": false,
         "no-var-requires": false,
-        "jsdoc-format": false
+        "jsdoc-format": false,
+        "no-shadowed-variable": false,
+        "no-angle-bracket-type-assertion": false
     },
     "jsRules": {
         "triple-equals": [

@@ -12,6 +12,14 @@ export default class ServerApi {
     return get(url, header)
   }
   /** ------------------------------------------*
+  * Group Code: Client
+  * ------------------------------------------- */
+  static getClient = () => {
+    const url = BaseURL + `/clients`
+    const header = {}
+    return get(url, header)
+  }
+  /** ------------------------------------------*
   * Group Code: places
   * ------------------------------------------- */
   static getPlaces = async () => {
