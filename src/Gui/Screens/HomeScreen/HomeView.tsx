@@ -1,10 +1,9 @@
 
 import Header from 'gui/Components/Header'
-import { object } from 'prop-types'
 import React from 'react'
 import { FlatList, View } from 'react-native'
 import { icBar } from 'utils/globalIcons'
-import ClientCell from './Components/clientCell'
+import ClientCell from './Components/ClientCell'
 import styles from './styles'
 
 export interface Props {
