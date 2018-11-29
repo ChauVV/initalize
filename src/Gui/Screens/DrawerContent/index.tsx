@@ -1,13 +1,16 @@
 
-import React, {Component} from 'react'
-import {StyleSheet, Text, View} from 'react-native'
+import BaseView from 'gui/Container/BaseView'
+import React, { Component } from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
 export default class DrawerContent extends Component {
-  render () {
+  render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native DrawerContent</Text>
-      </View>
+      <BaseView>
+        <View style={styles.container}>
+          <Text style={styles.welcome}>Welcome to React Native DrawerContent</Text>
+        </View>
+      </BaseView>
     )
   }
 }

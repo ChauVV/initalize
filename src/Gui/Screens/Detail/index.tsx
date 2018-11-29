@@ -1,4 +1,5 @@
-import Header from 'gui/Components/Header'
+
+import BaseView from 'gui/Container/BaseView'
 import React, { Component } from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
@@ -17,12 +18,12 @@ class Detail extends Component<Props> {
     console.log('client: ', client)
 
     return (
-      <View style={styles.container}>
-        <Header
-          title={'Detail'}
-          leftAction={() => pop()}
-          leftIcon={<IconFontAwesome name='chevron-left' style={{ color: 'white', fontSize: 25 }} />}
-        />
+      <BaseView
+        isHeader={true}
+        title={'Detail'}
+        leftAction={() => pop()}
+        leftIcon={<IconFontAwesome name='chevron-left' style={{ color: 'white', fontSize: 25 }} />}
+      >
         <View style={styles.body}>
           <View style={styles.avatarBorder}>
             <Image source={{ uri: client.avatar }} style={styles.avatar} resizeMode={'contain'} />
@@ -38,7 +39,7 @@ class Detail extends Component<Props> {
             </Text>
           </View>
         </View>
-      </View>
+      </ BaseView>
     )
   }
 }

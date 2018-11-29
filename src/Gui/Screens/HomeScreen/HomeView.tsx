@@ -1,11 +1,10 @@
 
-import Header from 'gui/Components/Header'
+import BaseView from 'gui/Container/BaseView'
 import React from 'react'
 import { FlatList, View } from 'react-native'
 import { icBar } from 'utils/globalIcons'
 import ClientCell from './Components/ClientCell'
 import styles from './styles'
-
 export interface Props {
   navigation: any,
   gotoDetail: (client: any) => {},
@@ -13,13 +12,13 @@ export interface Props {
 }
 export const HomeView = ({ navigation, clientState, gotoDetail }: Props) => {
   return (
+    <BaseView
+      isHeader={true}
+      title='HomeScreen'
+      rightAction={() => navigation.toggleDrawer()}
+      rightIcon={icBar}
+    >
 
-    <View style={styles.container}>
-      <Header
-        title='HomeScreen'
-        rightAction={() => navigation.toggleDrawer()}
-        rightIcon={icBar}
-      />
       <View style={styles.body}>
         <FlatList
           data={clientState.clients}
@@ -27,6 +26,6 @@ export const HomeView = ({ navigation, clientState, gotoDetail }: Props) => {
           renderItem={(object) => ClientCell({ object, gotoDetail })}
         />
       </View>
-    </View>
+    </BaseView>
   )
 }

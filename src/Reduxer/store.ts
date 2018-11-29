@@ -1,4 +1,4 @@
-import { middlewareNav } from 'gui/Container/AppNavigator/AppNavigator'
+import { middlewareNav } from 'gui/Container/AppNavigator'
 import { applyMiddleware, compose, createStore } from 'redux'
 import loggerMiddleware from 'redux-logger'
 import { createEpicMiddleware } from 'redux-observable'

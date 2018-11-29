@@ -1,48 +1,108 @@
-
-import React, { Component } from 'react'
+import Authen from 'gui/Container/Authen'
+import Detail from 'gui/Screens/Detail'
+import DrawerContent from 'gui/Screens/DrawerContent'
+import HomeScreen from 'gui/Screens/HomeScreen'
+import LoginScreen from 'gui/Screens/LoginScreen'
+import Setting from 'gui/Screens/Setting/'
+import React from 'react'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { createBottomTabNavigator, createDrawerNavigator, createStackNavigator } from 'react-navigation'
 import {
-  StatusBar, StyleSheet, View
-} from 'react-native'
+  createReactNavigationReduxMiddleware,
+  reduxifyNavigator
+} from 'react-navigation-redux-helpers'
 import { connect } from 'react-redux'
-import { actionsType } from 'utils/reduxConstants'
-// import { AppNavigator } from './AppNavigator'
 
-export interface Props {
-  checkAuthen: (...args: any[]) => any,
-  token: string
-}
-class AppConnect extends Component<Props> {
-  constructor(props: Props) {
-    super(props)
-    props.checkAuthen()
+const middlewareNav = createReactNavigationReduxMiddleware(
+  'root',
+  (state: any) => state.navigate
+)
+
+const HomeStack = createStackNavigator(
+  {
+    HomeScreen: { screen: HomeScreen },
+    Detail: { screen: Detail }
+  }, {
+    headerMode: 'none'
   }
-  render() {
-    const { token } = this.props
-    return (
-      <View style={styles.base}>
-        <StatusBar
-          barStyle='light-content'
-          translucent={true}
-          backgroundColor='transparent'
+)
+const MainNavigator = createBottomTabNavigator(
+  {
+    Home: HomeStack,
+    Settings: { screen: Setting }
+  },
+  {
+    navigationOptions: ({ navigation }: any) => ({
+      tabBarIcon: ({ focused }: any) => {
+        const { routeName } = navigation.state
+        let iconName = ''
+        if (routeName === 'Home') {
+          iconName = `ios-home`
+        } else if (routeName === 'Settings') {
+          iconName = `ios-settings`
+        }
+
+        return <Icon
+          name={iconName}
+          style={{ color: focused ? 'red' : '#7e7e7e', fontSize: 20 }}
         />
-        {/* <View style={styles.base}> */}
-        {/* <AppNavigator /> */}
-        {/* </View> */}
-      </View>
-    )
+      }
+    }),
+    tabBarOptions: {
+      activeTintColor: 'red',
+      inactiveTintColor: 'gray'
+    }
   }
+)
+
+MainNavigator.navigationOptions = ({ navigation }: any) => {
+  return navigation.state.index === 0
+    ? { drawerLockMode: 'unlocked' }
+    : { drawerLockMode: 'locked-closed' } // Only open drawer for main screen
 }
+
+const Drawer = createDrawerNavigator(
+  {
+    MainNavigator: {
+      screen: MainNavigator,
+      navigationOptions: {
+        gesturesEnabled: true
+      }
+    }
+  },
+  {
+    drawerPosition: 'right',
+    contentComponent: DrawerContent,
+    drawerWidth: 300
+  }
+)
+
+const RootNavigator = createStackNavigator(
+  {
+    Authen: { screen: Authen },
+    Login: {
+      screen: LoginScreen,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    },
+    Drawer: {
+      screen: Drawer,
+      navigationOptions: {
+        gesturesEnabled: false
+      }
+    }
+  }, {
+    headerMode: 'none'
+  }
+)
+
+const AppWithNavigationState: any = reduxifyNavigator(RootNavigator, 'root')
 
 const mapStateToProps = (state: any) => ({
-  token: state.token
+  state: state.navigate
 })
-const mapactionsTypeToProps = (dispatch: any) => ({
-  checkAuthen: () => dispatch({ type: actionsType.CHECK_AUTHEN })
-})
-export default connect(mapStateToProps, mapactionsTypeToProps)(AppConnect)
 
-const styles = StyleSheet.create({
-  base: {
-    flex: 1
-  }
-})
+const AppNavigator = connect(mapStateToProps)(AppWithNavigationState)
+
+export { RootNavigator, AppNavigator, middlewareNav }

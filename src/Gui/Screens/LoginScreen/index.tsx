@@ -1,4 +1,5 @@
 
+import BaseView from 'gui/Container/BaseView'
 import React, { Component } from 'react'
 import {
   StyleSheet, Text, TouchableOpacity, View
@@ -9,7 +10,6 @@ import { COLORS, height, ISIOS, width } from 'utils/globalStyles'
 import { actionsType } from 'utils/reduxConstants'
 
 export interface Props {
-  userState: any,
   login: () => {}
 }
 
@@ -22,17 +22,18 @@ class LoginScreen extends Component<Props> {
     }
   }
   render() {
-    const { userState, login } = this.props
+    const { login } = this.props
 
     return (
-      <View style={styles.container}>
-        <TouchableOpacity
-          onPress={() => login()}
-          style={styles.btnLogin}>
-          <Text style={styles.txtBtn}>Login</Text>
-        </TouchableOpacity>
-
-      </View>
+      <BaseView >
+        <View style={styles.container}>
+          <TouchableOpacity
+            onPress={() => login()}
+            style={styles.btnLogin}>
+            <Text style={styles.txtBtn}>Login</Text>
+          </TouchableOpacity>
+        </View>
+      </BaseView>
     )
   }
 }

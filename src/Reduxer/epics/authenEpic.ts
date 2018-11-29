@@ -42,35 +42,7 @@ export default (action$: ActionsObservable<Action>, store: MiddlewareAPI<{}>, de
     )
   })
 
-  const fetchUser$ = action$.ofType(actionsType.FETCH_USER).switchMap((action: any) => {
-    return Observable.concat(
-      Observable.fromPromise(ServerAPI.getUsers())
-        .takeUntil(Observable.timer(TIME_OUT))
-        .takeUntil(action$.ofType(actionsType.CANCEL_FETCHING_USER))
-        .mergeMap((response) => {
-          if (response) {
-            if (response.status === statusCode.CODE_200) {
-              return Observable.concat(
-                Observable.of({ type: actionsType.FETCH_USER_SUCCESS, payload: { users: response.data } }),
-                Observable.of({ type: actionsType.FETCH_PLACES })
-              )
-            } else {
-              return Observable.concat(
-                Observable.of({ type: actionsType.FETCH_USER_FAIL })
-              )
-            }
-          } else {
-            ServerAPI.showAlert(ttError, strMessageTimeout)
-            return Observable.concat(
-              Observable.of({ type: actionsType.FETCH_USER_FAIL })
-            )
-          }
-        })
-    )
-  })
-
   return Observable.merge(
-    fetchUser$,
     checkAuthen$,
     login$,
     logout$
