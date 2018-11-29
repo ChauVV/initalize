@@ -3,10 +3,9 @@
 import { Action, MiddlewareAPI } from 'redux'
 import { ActionsObservable } from 'redux-observable'
 const SimpleStore = require('react-native-simple-store')
-import ServerAPI from 'reduxer/api'
 import { Observable } from 'rxjs'
 import { KeyStore, RouteKey } from 'utils/globalConstants'
-import { actionsType, statusCode, strMessageTimeout, TIME_OUT, ttError } from 'utils/reduxConstants'
+import { actionsType } from 'utils/reduxConstants'
 
 export default (action$: ActionsObservable<Action>, store: MiddlewareAPI<{}>, dependencies: any) => {
   const checkAuthen$ = action$.ofType(actionsType.CHECK_AUTHEN).switchMap((action: any) => {

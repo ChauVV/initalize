@@ -18,7 +18,7 @@ export default (action$: ActionsObservable<Action>, store: MiddlewareAPI<{}>, de
             if (response.status === statusCode.CODE_200) {
               return Observable.concat(
                 Observable.of({ type: actionsType.FETCH_CLIENT_SUCCESS, payload: { clients: response.data } }),
-                Observable.of({ type: actionsType.FETCH_PLACES })
+                // Observable.of({ type: actionsType.FETCH_PLACES }) // Call next action if have
               )
             } else {
               return Observable.concat(
