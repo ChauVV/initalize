@@ -5,10 +5,11 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { actionsType } from 'utils/reduxConstants'
-import { AppNavigator } from './AppNavigator'
+// import { AppNavigator } from './AppNavigator'
 
 export interface Props {
-  checkAuthen: (...args: any[]) => any
+  checkAuthen: (...args: any[]) => any,
+  token: string
 }
 class AppConnect extends Component<Props> {
   constructor(props: Props) {
@@ -16,6 +17,7 @@ class AppConnect extends Component<Props> {
     props.checkAuthen()
   }
   render() {
+    const { token } = this.props
     return (
       <View style={styles.base}>
         <StatusBar
@@ -23,15 +25,16 @@ class AppConnect extends Component<Props> {
           translucent={true}
           backgroundColor='transparent'
         />
-        <View style={styles.base}>
-          <AppNavigator />
-        </View>
+        {/* <View style={styles.base}> */}
+        {/* <AppNavigator /> */}
+        {/* </View> */}
       </View>
     )
   }
 }
 
 const mapStateToProps = (state: any) => ({
+  token: state.token
 })
 const mapactionsTypeToProps = (dispatch: any) => ({
   checkAuthen: () => dispatch({ type: actionsType.CHECK_AUTHEN })

@@ -1,3 +1,4 @@
+import Authen from 'gui/Container/AppNavigator'
 import Detail from 'gui/Screens/Detail'
 import DrawerContent from 'gui/Screens/DrawerContent'
 import HomeScreen from 'gui/Screens/HomeScreen'
@@ -78,7 +79,7 @@ const Drawer = createDrawerNavigator(
 
 const RootNavigator = createStackNavigator(
   {
-    // SplashScreen: { screen: SplashScreen },
+    Authen: { screen: Authen },
     Login: {
       screen: LoginScreen,
       navigationOptions: {

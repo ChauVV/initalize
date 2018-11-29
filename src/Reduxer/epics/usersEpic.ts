@@ -1,5 +1,5 @@
 
-// import SimpleStore from 'react-native-simple-store'
+
 import { Action, MiddlewareAPI } from 'redux'
 import { ActionsObservable } from 'redux-observable'
 const SimpleStore = require('react-native-simple-store')
@@ -17,11 +17,11 @@ export default (action$: ActionsObservable<Action>, store: MiddlewareAPI<{}>, de
             console.log('token get: ', token)
             return Observable.concat(
               Observable.of({ type: actionsType.SET_TOKEN, payload: { token } }),
-              Observable.of({ type: actionsType.PUSH, routeName: RouteKey.Drawer })
+              Observable.of({ type: actionsType.RESET_TO_ROUTE, routeName: RouteKey.Drawer })
             )
           } else {
             return Observable.concat(
-              Observable.of({ type: actionsType.PUSH, routeName: RouteKey.Login })
+              Observable.of({ type: actionsType.RESET_TO_ROUTE, routeName: RouteKey.Login })
             )
           }
         })

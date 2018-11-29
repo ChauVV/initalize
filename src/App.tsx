@@ -4,11 +4,13 @@ import { Provider } from 'react-redux'
 import storeRedux from 'reduxer/store'
 
 import AppConnect from 'gui/Container/AppNavigator'
+import { AppNavigator } from 'gui/Container/AppNavigator/AppNavigator'
 
 const App = () => {
   return (
     <Provider store={storeRedux}>
-      <AppConnect />
+      {/* <AppConnect /> */}
+      <AppNavigator />
     </Provider>
   )
 }

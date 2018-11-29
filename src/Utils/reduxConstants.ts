@@ -30,7 +30,8 @@ export const actionsType = {
   CANCEL_FETCHING_PLACES: 'CANCEL_FETCHING_PLACES',
   // NAVIGATION
   PUSH: 'push',
-  POP: 'pop'
+  POP: 'pop',
+  RESET_TO_ROUTE: 'resetToRoute'
 }
 export const initState = {
   currency: 'VND',

@@ -3,8 +3,9 @@ import React, { Component } from 'react'
 import {
   StyleSheet, Text, TouchableOpacity, View
 } from 'react-native'
+import SplashScreen from 'react-native-splash-screen'
 import { connect } from 'react-redux'
-import { COLORS, height, width } from 'utils/globalStyles'
+import { COLORS, height, ISIOS, width } from 'utils/globalStyles'
 import { actionsType } from 'utils/reduxConstants'
 
 export interface Props {
@@ -13,15 +14,18 @@ export interface Props {
 }
 
 class LoginScreen extends Component<Props> {
+  componentDidMount() {
+    if (ISIOS) {
+      SplashScreen.hide()
+    } else {
+      setTimeout(() => SplashScreen.hide(), 100)
+    }
+  }
   render() {
     const { userState, login } = this.props
 
     return (
       <View style={styles.container}>
-        {userState.isLoading && <Text style={styles.txtLoading}>loading...</Text>}
-        {userState.users.length > 0 &&
-          <Text style={styles.textUser}>{`Has ${userState.users.length} users`}</Text>
-        }
         <TouchableOpacity
           onPress={() => login()}
           style={styles.btnLogin}>
@@ -34,11 +38,8 @@ class LoginScreen extends Component<Props> {
 }
 
 const mapStateToProps = (state: any) => ({
-  userState: state.userState
 })
 const mapactionsTypeToProps = (dispatch: any) => ({
-  fetchUsers: () => dispatch({ type: actionsType.FETCH_USER, payload: { users: [], isLoading: true } }),
-  updateUser: (users: any) => dispatch({ type: actionsType.UPDATE_USER_SUCCESS, payload: users }),
   login: () => dispatch({ type: actionsType.LOGIN })
 })
 export default connect(mapStateToProps, mapactionsTypeToProps)(LoginScreen)

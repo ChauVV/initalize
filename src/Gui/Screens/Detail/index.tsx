@@ -13,8 +13,8 @@ export interface Props {
 class Detail extends Component<Props> {
   render() {
     const { pop, navigation } = this.props
-    const user = navigation.getParam('user', {})
-    console.log('user: ', user)
+    const client = navigation.getParam('client', {})
+    console.log('client: ', client)
 
     return (
       <View style={styles.container}>
@@ -25,16 +25,16 @@ class Detail extends Component<Props> {
         />
         <View style={styles.body}>
           <View style={styles.avatarBorder}>
-            <Image source={{ uri: user.avatar }} style={styles.avatar} resizeMode={'contain'} />
+            <Image source={{ uri: client.avatar }} style={styles.avatar} resizeMode={'contain'} />
           </View>
           <View style={styles.info}>
             <Text style={styles.text}>
               <Text style={styles.infoTitle}>{'Name: '}</Text>
-              <Text>{user.name}</Text>
+              <Text>{client.name}</Text>
             </Text>
             <Text style={styles.text}>
               <Text style={styles.infoTitle}>{'Age: '}</Text>
-              <Text>{user.age}</Text>
+              <Text>{client.age}</Text>
             </Text>
           </View>
         </View>
@@ -43,7 +43,6 @@ class Detail extends Component<Props> {
   }
 }
 const mapStateToProps = (state: any) => ({
-  userState: state.userState
 })
 const mapactionsTypeToProps = (dispatch: any) => ({
   pop: () => dispatch({ type: actionsType.POP })

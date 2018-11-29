@@ -11,7 +11,7 @@ import userReducer from './userReducer'
 export default combineReducers({
   currency: currencyReducer,
   language: languageReducer,
-  userState: userReducer,
+  // userState: userReducer,
   places: placesReducer,
   loading: loadingReducer,
   navigate: routesReducer,
