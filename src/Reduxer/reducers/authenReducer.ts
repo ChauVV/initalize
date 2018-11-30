@@ -1,16 +1,9 @@
 const SimpleStore = require('react-native-simple-store')
 import { KeyStore } from 'utils/globalConstants'
-import { actionsType } from 'utils/reduxConstants'
+import { actionsType, initState } from 'utils/reduxConstants'
 
-const authenStateInit = {
-  id: '',
-  userName: '',
-  passWord: '',
-  token: '',
-  displayName: '',
-  Avatar: null
-}
-export default (state = authenStateInit, action: any) => {
+
+export default (state = initState.authenStateInit, action: any) => {
   switch (action.type) {
     case actionsType.LOGIN_SUCCESS:
       console.log('action.payload.token: ', action.payload)
@@ -18,6 +11,8 @@ export default (state = authenStateInit, action: any) => {
       return action.payload
     case actionsType.AUTHEN_SUCCESS:
       return action.payload
+    case actionsType.LOGOUT:
+      return initState.authenStateInit
     default:
       return state
   }

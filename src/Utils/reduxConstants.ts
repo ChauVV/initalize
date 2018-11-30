@@ -31,7 +31,15 @@ export const initState = {
   currency: 'VND',
   language: 'vi',
   users: [],
-  places: []
+  places: [],
+  authenStateInit: {
+    id: '',
+    userName: '',
+    passWord: '',
+    token: '',
+    displayName: '',
+    Avatar: null
+  }
 }
 /**
  * TIME_OUT: 30s

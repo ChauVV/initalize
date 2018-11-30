@@ -56,7 +56,6 @@ export default (action$: ActionsObservable<Action>, store: MiddlewareAPI<{}>, de
 
   const logout$ = action$.ofType(actionsType.LOGOUT).switchMap((action: any) => {
     return Observable.concat(
-      Observable.of({ type: actionsType.SET_TOKEN, payload: { token: null } }), // Call api logout if have
       Observable.of({ type: actionsType.PUSH, routeName: RouteKey.Login })
     )
   })
