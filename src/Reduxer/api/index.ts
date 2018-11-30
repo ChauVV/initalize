@@ -4,11 +4,12 @@ import { BaseURL } from 'utils/globalConstants'
 
 export default class ServerApi {
   /** ------------------------------------------*
-  * Group Code: User
+  * Group Code: Authen
   * ------------------------------------------- */
-  static getUsers = () => {
-    const url = BaseURL + `/clients`
+  static login = () => { /// THIS is just demo
+    const url = BaseURL + `/authen`
     const header = {}
+    console.log('login...')
     return get(url, header)
   }
   /** ------------------------------------------*
