@@ -24,3 +24,9 @@
 }
 ```
 4. More info at: [Configure TypeScript, TSLint, and Prettier in VS Code for React Native Development](https://medium.com/@sgroff04/configure-typescript-tslint-and-prettier-in-vs-code-for-react-native-development-7f31f0068d2)
+.
++-- A
++-- B
+|   +-- C
+|   +-- D
++-- E
