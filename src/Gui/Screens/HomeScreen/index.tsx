@@ -43,6 +43,7 @@ class HomeScreen extends Component<Props> {
     const { navigate } = this.props
 
     const activeRoute = this.getActiveScreen(navigate)
+    console.log('activeRoute: ', activeRoute)
     if (activeRoute.routeName === 'HomeScreen' || activeRoute.routeName === 'Login') {
       BackHandler.exitApp()
       return true

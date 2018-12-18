@@ -20,19 +20,13 @@ const middlewareNav = createReactNavigationReduxMiddleware(
 
 const HomeStack = createStackNavigator(
   {
-    HomeScreen: {
-      screen: HomeScreen
-  },
-    Detail: {
-      screen: Detail,
-      navigationOptions: () => ({
-        drawerLockMode: 'locked-closed'
-      })
-    }
+    HomeScreen: { screen: HomeScreen },
+    Detail: { screen: Detail }
   }, {
     headerMode: 'none'
   }
 )
+
 
 
 const MainNavigator = createBottomTabNavigator(
@@ -42,7 +36,6 @@ const MainNavigator = createBottomTabNavigator(
   },
   {
     navigationOptions: ({ navigation }: any) => ({
-
       tabBarIcon: ({ focused }: any) => {
         const { routeName } = navigation.state
         let iconName = ''
@@ -64,15 +57,30 @@ const MainNavigator = createBottomTabNavigator(
     }
   }
 )
+const getActiveScreen = (navigationState: any): any => {
+  if (navigationState.index !== undefined) {
+    return getActiveScreen(navigationState.routes[navigationState.index])
+  } else {
+    return navigationState
+  }
+}
+
+MainNavigator.navigationOptions = ({ navigation }: any) => {
+  let drawerLockMode = 'locked-closed'
+  const activeRoute = getActiveScreen(navigation.state)
+  console.log('activeRoute: ', activeRoute.routeName)
+  if (activeRoute.routeName === 'HomeScreen' || activeRoute.routeName === 'Settings') {
+    drawerLockMode = 'unlocked'
+  }
+  return {
+    drawerLockMode
+  }
+}
 
 const Drawer = createDrawerNavigator(
   {
     MainNavigator: {
-      screen: MainNavigator,
-      navigationOptions: ({ navigation }: any) => ({
-        drawerLockMode: navigation.state.index === 0 ? 'unlocked' : 'locked-closed',
-        gesturesEnabled: navigation.state.index === 0 ? true : false
-      })
+      screen: MainNavigator
     }
   },
   {
@@ -100,9 +108,6 @@ const RootNavigator = createStackNavigator(
     headerMode: 'none'
   }
 )
-HomeStack.navigationOptions = ({ navigation }: any) => navigation.state.index === 0
-    ? { drawerLockMode: 'unlocked', gesturesEnabled: true }
-    : { drawerLockMode: 'locked-closed', gesturesEnabled: false } // Only open drawer for main screen
 
 const AppWithNavigationState: any = reduxifyNavigator(RootNavigator, 'root')
 
