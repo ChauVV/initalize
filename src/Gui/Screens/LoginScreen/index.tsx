@@ -6,6 +6,7 @@ import {
 } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
 import { connect } from 'react-redux'
+import { RouteKey } from 'utils/globalConstants'
 import { COLORS, height, ISIOS, width } from 'utils/globalStyles'
 import { actionsType } from 'utils/reduxConstants'
 
@@ -41,7 +42,7 @@ class LoginScreen extends Component<Props> {
     const { navigate } = this.props
 
     const activeRoute = this.getActiveScreen(navigate)
-    if (activeRoute.routeName === 'HomeScreen' || activeRoute.routeName === 'Login') {
+    if (activeRoute.routeName === RouteKey.HomeScreen || activeRoute.routeName === RouteKey.Login) {
       BackHandler.exitApp()
       return true
     } else {

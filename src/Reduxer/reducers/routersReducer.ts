@@ -1,6 +1,8 @@
 
 import { RootNavigator } from 'gui/Container/AppNavigator'
 import { NavigationActions, StackActions } from 'react-navigation'
+import { RouteKey } from 'utils/globalConstants'
+import { actionsType } from 'utils/reduxConstants'
 
 const getActiveRoute = (state: any): any => {
   if (state.index !== undefined) {
@@ -11,20 +13,7 @@ const getActiveRoute = (state: any): any => {
 }
 export default (state: any, action: any) => {
   switch (action.type) {
-    case 'push':
-    case 'pop':
-    case 'popToTop':
-    case 'resetToRoute':
-    case 'reset':
-    case 'clear':
-      const lastRoute = getActiveRoute(state)
-      console.log('action: ', state, action, lastRoute, action.routeName === lastRoute.routeName)
-      break
-    default:
-      break
-  }
-  switch (action.type) {
-    case 'push': {
+    case actionsType.PUSH: {
       const lastRoute = getActiveRoute(state)
       if (action.routeName === lastRoute.routeName) {
         return state
@@ -34,23 +23,26 @@ export default (state: any, action: any) => {
       }), state)
       return (newState || state)
     }
-    case 'pop': {
+
+    case actionsType.POP: {
       const lastRoute = getActiveRoute(state)
-      if (lastRoute.routeName === 'HomeScreen' || lastRoute.routeName === 'Login') {
+      if (lastRoute.routeName === RouteKey.HomeScreen || lastRoute.routeName === RouteKey.Login) {
         return state
       }
       const newState = RootNavigator.router.getStateForAction(NavigationActions.back(), state)
       return (newState || state)
     }
-    case 'popToTop': {
+
+    case actionsType.POP_TO_TOP: {
       const lastRoute = getActiveRoute(state)
-      if (lastRoute.routeName === 'HomeScreen' || lastRoute.routeName === 'Login') {
+      if (lastRoute.routeName === RouteKey.HomeScreen || lastRoute.routeName === RouteKey.Login) {
         return state
       }
       const newState = RootNavigator.router.getStateForAction(StackActions.popToTop({}), state)
       return (newState || state)
     }
-    case 'resetToRoute': {
+
+    case actionsType.RESET_TO_ROUTE: {
       const newState = RootNavigator.router.getStateForAction(StackActions.reset({
         index: 0,
         key: action.key,
@@ -60,13 +52,14 @@ export default (state: any, action: any) => {
       }), state)
       return newState || state
     }
-    case 'reset':
+
+    case actionsType.RESET:
       return {
         ...state,
         index: 0,
-        routes: [{ key: 'Init', routeName: 'Login' }]
+        routes: [{ key: 'Init', routeName: RouteKey.Login }]
       }
-    case 'clear':
+    case actionsType.CLEAR:
       return {}
     default: {
       const newState = RootNavigator.router.getStateForAction(action, state)

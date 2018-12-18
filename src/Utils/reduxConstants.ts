@@ -25,7 +25,10 @@ export const actionsType = {
   // NAVIGATION
   PUSH: 'push',
   POP: 'pop',
-  RESET_TO_ROUTE: 'resetToRoute'
+  POP_TO_TOP: 'popToTop',
+  RESET_TO_ROUTE: 'resetToRoute',
+  RESET: 'reset',
+  CLEAR: 'clear'
 }
 export const initState = {
   currency: 'VND',

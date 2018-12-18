@@ -44,7 +44,7 @@ class HomeScreen extends Component<Props> {
 
     const activeRoute = this.getActiveScreen(navigate)
     console.log('activeRoute: ', activeRoute)
-    if (activeRoute.routeName === 'HomeScreen' || activeRoute.routeName === 'Login') {
+    if (activeRoute.routeName === RouteKey.HomeScreen || activeRoute.routeName === RouteKey.Login) {
       BackHandler.exitApp()
       return true
     } else {
