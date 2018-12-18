@@ -20,12 +20,21 @@ const middlewareNav = createReactNavigationReduxMiddleware(
 
 const HomeStack = createStackNavigator(
   {
-    HomeScreen: { screen: HomeScreen },
-    Detail: { screen: Detail }
+    HomeScreen: {
+      screen: HomeScreen
+  },
+    Detail: {
+      screen: Detail,
+      navigationOptions: () => ({
+        drawerLockMode: 'locked-closed'
+      })
+    }
   }, {
     headerMode: 'none'
   }
 )
+
+
 const MainNavigator = createBottomTabNavigator(
   {
     Home: HomeStack,
@@ -33,6 +42,7 @@ const MainNavigator = createBottomTabNavigator(
   },
   {
     navigationOptions: ({ navigation }: any) => ({
+
       tabBarIcon: ({ focused }: any) => {
         const { routeName } = navigation.state
         let iconName = ''
@@ -55,19 +65,14 @@ const MainNavigator = createBottomTabNavigator(
   }
 )
 
-MainNavigator.navigationOptions = ({ navigation }: any) => {
-  return navigation.state.index === 0
-    ? { drawerLockMode: 'unlocked' }
-    : { drawerLockMode: 'locked-closed' } // Only open drawer for main screen
-}
-
 const Drawer = createDrawerNavigator(
   {
     MainNavigator: {
       screen: MainNavigator,
-      navigationOptions: {
-        gesturesEnabled: true
-      }
+      navigationOptions: ({ navigation }: any) => ({
+        drawerLockMode: navigation.state.index === 0 ? 'unlocked' : 'locked-closed',
+        gesturesEnabled: navigation.state.index === 0 ? true : false
+      })
     }
   },
   {
@@ -76,7 +81,6 @@ const Drawer = createDrawerNavigator(
     drawerWidth: 300
   }
 )
-
 const RootNavigator = createStackNavigator(
   {
     Authen: { screen: Authen },
@@ -96,6 +100,9 @@ const RootNavigator = createStackNavigator(
     headerMode: 'none'
   }
 )
+HomeStack.navigationOptions = ({ navigation }: any) => navigation.state.index === 0
+    ? { drawerLockMode: 'unlocked', gesturesEnabled: true }
+    : { drawerLockMode: 'locked-closed', gesturesEnabled: false } // Only open drawer for main screen
 
 const AppWithNavigationState: any = reduxifyNavigator(RootNavigator, 'root')
 

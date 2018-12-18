@@ -70,7 +70,6 @@ class BaseView extends PureComponent<Props> {
 const mapStateToProps = (state: any) => ({
 })
 const mapactionsTypeToProps = (dispatch: any) => ({
-  checkAuthen: () => dispatch({ type: actionsType.CHECK_AUTHEN })
 })
 export default connect(mapStateToProps, mapactionsTypeToProps)(BaseView)
 

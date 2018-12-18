@@ -2,7 +2,7 @@
 import BaseView from 'gui/Container/BaseView'
 import React, { Component } from 'react'
 import {
-  StyleSheet, Text, TouchableOpacity, View
+  BackHandler, StyleSheet, Text, TouchableOpacity, View
 } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
 import { connect } from 'react-redux'
@@ -11,14 +11,42 @@ import { actionsType } from 'utils/reduxConstants'
 
 export interface Props {
   login: () => {}
+  navigate: any,
+  close: any
 }
 
 class LoginScreen extends Component<Props> {
+  constructor(props: Props) {
+    super(props)
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress)
+  }
   componentDidMount() {
     if (ISIOS) {
       SplashScreen.hide()
     } else {
       setTimeout(() => SplashScreen.hide(), 100)
+    }
+  }
+  componentWillUnmount () {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress)
+  }
+  getActiveScreen = (navigationState: any): any => {
+    if (navigationState.index !== undefined) {
+      return this.getActiveScreen(navigationState.routes[navigationState.index])
+    } else {
+      return navigationState
+    }
+  }
+  onBackPress = () => {
+    const { navigate } = this.props
+
+    const activeRoute = this.getActiveScreen(navigate)
+    if (activeRoute.routeName === 'HomeScreen' || activeRoute.routeName === 'Login') {
+      BackHandler.exitApp()
+      return true
+    } else {
+      this.props.close()
+      return true
     }
   }
   render() {
@@ -39,9 +67,11 @@ class LoginScreen extends Component<Props> {
 }
 
 const mapStateToProps = (state: any) => ({
+  navigate: state.navigate
 })
 const mapactionsTypeToProps = (dispatch: any) => ({
-  login: () => dispatch({ type: actionsType.LOGIN })
+  login: () => dispatch({ type: actionsType.LOGIN }),
+  close: () => dispatch({ type: 'pop' })
 })
 export default connect(mapStateToProps, mapactionsTypeToProps)(LoginScreen)
 

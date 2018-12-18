@@ -5,13 +5,14 @@ import { connect } from 'react-redux'
 import { actionsType } from 'utils/reduxConstants'
 
 export interface Props {
-  checkAuthen: (...args: any[]) => any,
+  checkAuthen: (...args: any[]) => any
 }
 class AppConnect extends Component<Props> {
   constructor(props: Props) {
     super(props)
     props.checkAuthen()
   }
+
   render() {
     return (
       <BaseView />
