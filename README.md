@@ -1,6 +1,7 @@
 1. yarn global add prettier
 2. Add vscode TSlint
-3. cmd + shift + p -> search user settings and add follows:
+3. `` cmd + shift + p `` -> search user settings and add follows:
+```
 {
     "workbench.iconTheme": "vscode-icons",
     "window.zoomLevel": -1,
@@ -21,4 +22,5 @@
         "editor.formatOnSave": true
     }
 }
-4. More info at: https://medium.com/@sgroff04/configure-typescript-tslint-and-prettier-in-vs-code-for-react-native-development-7f31f0068d2
+```
+4. ['Prettier to format code'](https://medium.com/@sgroff04/configure-typescript-tslint-and-prettier-in-vs-code-for-react-native-development-7f31f0068d2)
