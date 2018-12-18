@@ -12,6 +12,7 @@ import {
   reduxifyNavigator
 } from 'react-navigation-redux-helpers'
 import { connect } from 'react-redux'
+import { RouteKey } from 'utils/globalConstants'
 
 const middlewareNav = createReactNavigationReduxMiddleware(
   'root',
@@ -27,9 +28,7 @@ const HomeStack = createStackNavigator(
   }
 )
 
-
-
-const MainNavigator = createBottomTabNavigator(
+const MainTabbar = createBottomTabNavigator(
   {
     Home: HomeStack,
     Settings: { screen: Setting }
@@ -39,9 +38,9 @@ const MainNavigator = createBottomTabNavigator(
       tabBarIcon: ({ focused }: any) => {
         const { routeName } = navigation.state
         let iconName = ''
-        if (routeName === 'Home') {
+        if (routeName === RouteKey.Home) {
           iconName = `ios-home`
-        } else if (routeName === 'Settings') {
+        } else if (routeName === RouteKey.Settings) {
           iconName = `ios-settings`
         }
 
@@ -65,11 +64,10 @@ const getActiveScreen = (navigationState: any): any => {
   }
 }
 
-MainNavigator.navigationOptions = ({ navigation }: any) => {
+MainTabbar.navigationOptions = ({ navigation }: any) => {
   let drawerLockMode = 'locked-closed'
   const activeRoute = getActiveScreen(navigation.state)
-  console.log('activeRoute: ', activeRoute.routeName)
-  if (activeRoute.routeName === 'HomeScreen' || activeRoute.routeName === 'Settings') {
+  if (activeRoute.routeName === RouteKey.HomeScreen || activeRoute.routeName === RouteKey.Settings) { // Only open drawer for 2 these screen
     drawerLockMode = 'unlocked'
   }
   return {
@@ -79,8 +77,8 @@ MainNavigator.navigationOptions = ({ navigation }: any) => {
 
 const Drawer = createDrawerNavigator(
   {
-    MainNavigator: {
-      screen: MainNavigator
+    MainTabbar: {
+      screen: MainTabbar
     }
   },
   {
