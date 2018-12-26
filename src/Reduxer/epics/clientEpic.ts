@@ -9,6 +9,7 @@ export default (action$: ActionsObservable<Action>, store: MiddlewareAPI<{}>, de
 
 
   const fetchClient$ = action$.ofType(actionsType.FETCH_CLIENT).switchMap((action: any) => {
+    console.log('action FETCH_CLIENT: ', action)
     return Observable.concat(
       Observable.fromPromise(ServerAPI.getClient())
         .takeUntil(Observable.timer(TIME_OUT))

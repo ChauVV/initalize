@@ -35,6 +35,27 @@ export const COLORS = {
   TEXT: 'white',
   PING: '#FF7043'
 }
+export const THEME_DEFAULT = {
+  fontRegular: '',
+  fontMedium: '',
+  fontLight: '',
+  fontSize: width(4),
+  fontSizeTitle: width(6),
+  // COLORS
+  colorPrimary: '', // primary color for your app, usually your brand color.
+  colorAccent: '', // secondary color for your app which complements the primary color.
+  colorBackground: '', // background color for pages, such as lists.
+  colorSurface: '', // background color for elements containing content, such as cards.
+  colorText: '', // text color for content.
+  colorTextTitle: '', // text color for title.
+  colorInfo : '',
+  colorSuccess : '',
+  colorDanger : '',
+  colorWarning : '',
+  colorDisabled: '' , // color for disabled elements.
+  colorPlaceholder: '', // color for placeholder text, such as input placeholder.
+  colorBackdrop: '', // color for backdrops of various components such as modals.
+}
 const styles = StyleSheet.create({
   backgroundDefault: {
     flex: 1,
