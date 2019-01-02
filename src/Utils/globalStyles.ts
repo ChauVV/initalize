@@ -36,25 +36,38 @@ export const COLORS = {
   PING: '#FF7043'
 }
 export const THEME_DEFAULT = {
-  fontRegular: '',
-  fontMedium: '',
-  fontLight: '',
-  fontSize: width(4),
-  fontSizeTitle: width(6),
+  // FONT
+  // family
+  fontRegular: 'Roboto-Regular',
+  fontRegularItalic: 'Roboto-Italic',
+  fontBold: 'Roboto-Bold',
+  fontBoldItalic: 'Roboto-BoldItalic',
+  fontLight: 'Roboto-Light',
+  fontLightItalic: 'Roboto-LightItalic',
+  // size
+  fontSizeTiny: width(1.2),
+  fontSizeLight: width(1.5),
+  fontSize: width(2),
+  fontSizeLarge: width(3),
+  fontSizeMedium: width(4),
+
   // COLORS
-  colorPrimary: '', // primary color for your app, usually your brand color.
-  colorAccent: '', // secondary color for your app which complements the primary color.
-  colorBackground: '', // background color for pages, such as lists.
-  colorSurface: '', // background color for elements containing content, such as cards.
-  colorText: '', // text color for content.
-  colorTextTitle: '', // text color for title.
-  colorInfo : '',
-  colorSuccess : '',
-  colorDanger : '',
-  colorWarning : '',
-  colorDisabled: '' , // color for disabled elements.
-  colorPlaceholder: '', // color for placeholder text, such as input placeholder.
-  colorBackdrop: '', // color for backdrops of various components such as modals.
+  colorPrimary: 'white', // primary color for your app, usually your brand color.
+  colorAccent: 'black', // secondary color for your app which complements the primary color.
+  colorBackground: '#e0f2f1', // background color for pages, such as lists.
+  colorSurface: 'black', // background color for elements containing content, such as cards.
+  colorText: 'black', // text color for content.
+  colorTextTitle: 'black', // text color for title.
+  colorInfo : 'black',
+  colorSuccess : 'green',
+  colorDanger : 'red',
+  colorWarning : 'yellow',
+  colorDisabled: 'gray' , // color for disabled elements.
+  colorPlaceholder: 'gray' // color for placeholder text, such as input placeholder.
+}
+export const THEME = {
+  light: THEME_DEFAULT,
+  pink: {...THEME_DEFAULT, colorBackground: 'pink', colorText: 'white'}
 }
 const styles = StyleSheet.create({
   backgroundDefault: {
